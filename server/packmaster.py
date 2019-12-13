@@ -1,7 +1,13 @@
-import model
+import data_model.model as model
+from flask import Flask, jsonify
+from flask import request, jsonify, send_from_directory, Response
+import cherrypy
+import os
+
 import traceback
 import sys
 
+app = Flask(__name__)
 
 def get_climate_key(temp):
     if temp % 10 > 5:
@@ -79,40 +85,63 @@ def get_hats(duration, climate):
     return "%s x %s" % (kind, amount) if kind else None
 
 
+@app.route('/', methods=['GET'])
+def index():
+    print("HELLLLLP")
+    return send_from_directory(os.path.join('..', 'packmaster3000', 'dist', 'packmaster3000'), 'index.html')
+
+
+@app.route('/<path:path>', methods=['GET'])
+def index_all(path):
+    if '.' in path:
+        return send_from_directory(os.path.join('..', 'packmaster3000', 'dist', 'packmaster3000'), path, cache_timeout=0)
+    else:
+        return send_from_directory(os.path.join('..', 'packmaster3000', 'dist', 'packmaster3000'), 'index.html', cache_timeout=0)
+
+
 # TODO: Laundry bag, belt
-def main(args):
-    duration = int(args[0])
-    temp = int(args[1])
+@app.route('/api/packlist', methods=['POST'])
+def packlist():
+    data = request.get_json()
+    duration = int(data['duration'])
+    temp = int(data['temperature'])
     climate = get_climate_key(temp)
 
-    if get_footwear(duration, climate):
-        print(get_footwear(duration, climate))
-    if get_socks(duration, climate):
-        print(get_socks(duration, climate))
-    if get_undies(duration, climate):
-        print(get_undies(duration, climate))
-    if get_bottoms(duration, climate):
-        print(get_bottoms(duration, climate))
-    if get_tops(duration, climate):
-        print(get_tops(duration, climate))
-    if get_warm_layers(duration, climate):
-        print(get_warm_layers(duration, climate))
-    if get_outer_layers(duration, climate):
-        print(get_outer_layers(duration, climate))
-    if get_gloves(duration, climate):
-        print(get_gloves(duration, climate))
-    if get_hats(duration, climate):
-        print(get_hats(duration, climate))
+    response = {
+        "footwear": get_footwear(duration, climate),
+        "socks": get_socks(duration, climate),
+        "undies": get_undies(duration, climate),
+        "bottoms": get_bottoms(duration, climate),
+        "tops": get_tops(duration, climate),
+        "warm_layers": get_warm_layers(duration, climate),
+        "outer_layers": get_outer_layers(duration, climate),
+        "gloves": get_gloves(duration, climate),
+        "hats": get_hats(duration, climate)
+    }
+
+    return jsonify(response)
+
+def main():
+    cherrypy.tree.graft(app.wsgi_app, '/')
+    cherrypy.config.update({'server.socket_host': '0.0.0.0',
+                            'server.socket_port': 5000,
+                            'engine.autoreload.on': False,
+                            })
+
+    cherrypy.engine.start()
 
 
-################################################################
-# run main with sys args
-################################################################
 if __name__ == '__main__':
-    try:
-        main(sys.argv[1:])
-    except SystemExit as e:
-        if e.code == 0:
-            pass
-    except:
-        traceback.print_exc()
+    main()
+
+# ################################################################
+# # run main with sys args
+# ################################################################
+# if __name__ == '__main__':
+#     try:
+#         main(sys.argv[1:])
+#     except SystemExit as e:
+#         if e.code == 0:
+#             pass
+#     except:
+#         traceback.print_exc()

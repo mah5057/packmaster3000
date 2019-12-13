@@ -1,0 +1,75 @@
+<div style="text-align:center">
+  <h1>
+    Pack Master 3000!
+  </h1>
+</div>
+<h2>Joseph's PACKMASTER 3000 by Matt</h2>
+<h3>Answer these questions and enter your email to receive a customized pack list that we think will be almost all the way right!</h3>
+<ul>
+  <div>
+    <li>Question 1: How long will your trip be?</li>
+    <select [(ngModel)]="duration">
+      <option value="none" selected disabled hidden> -- select an option -- </option>
+      <option value="0">Day Trip</option>
+      <option value="1">Overnight</option>
+      <option value="2">2 nights</option>
+      <option value="3">3 nights</option>
+      <option value="4">4 nights</option>
+      <option value="5">5 nights</option>
+      <option value="6">6 nights</option>
+      <option value="7">7 nights</option>
+    </select>
+  </div>
+  <br>
+  <div>
+    <li>Question 2: Whats the temperature gonna be?</li>
+    <select [(ngModel)]="temperature">
+      <option value="none" selected disabled hidden> -- select an option -- </option>
+      <option value="20">FREEZING (20 F)</option>
+      <option value="30">VERY COLD (30 F)</option>
+      <option value="40">COLD (40 F)</option>
+      <option value="50">CHILLY (50 F)</option>
+      <option value="60">MILD (60 F)</option>
+      <option value="70">WARM (70 F)</option>
+      <option value="80">HOT (80 F)</option>
+      <option value="90">VERY HOT (90 F)</option>
+      <option value="100">MELTING (100 F)</option>
+    </select>
+  </div>
+  <br>
+  <div>
+    <li>Question 3: What is your luxury level?</li>
+    <select [(ngModel)]="luxury">
+      <option value="none" selected disabled hidden> -- select an option -- </option>
+      <option value="0">Ultra Lite Backpacking</option>
+      <option value="1">Backpacking</option>
+      <option value="2">Car Camping</option>
+      <option value="3">Glamping</option>
+      <option value="4">1 star</option>
+      <option value="5">2 star</option>
+      <option value="6">3 star</option>
+      <option value="7">4 star</option>
+      <option value="8">5 star</option>
+    </select>
+  </div>
+  <br>
+  <div>
+    <li>Bonus Question!!!: Do you run hot or cold...</li>
+    <select [(ngModel)]="bonus">
+      <option value="none" selected disabled hidden> -- select an option -- </option>
+      <option value="hot">Hot</option>
+      <option value="cold">Cold</option>
+    </select>
+  </div>
+  <br>
+  <div>
+    <li>Enter email:</li>
+    <input type="text" name="email">
+  </div>
+  <br>
+  <div>
+    <button type="button" (click)="getPresentation()">Pack me!</button>
+  </div>
+</ul>
+
+
