@@ -87,7 +87,6 @@ def get_hats(duration, climate):
 
 @app.route('/', methods=['GET'])
 def index():
-    print("HELLLLLP")
     return send_from_directory(os.path.join('..', 'packmaster3000', 'dist', 'packmaster3000'), 'index.html')
 
 
@@ -116,7 +115,9 @@ def packlist():
         "warm_layers": get_warm_layers(duration, climate),
         "outer_layers": get_outer_layers(duration, climate),
         "gloves": get_gloves(duration, climate),
-        "hats": get_hats(duration, climate)
+        "hats": get_hats(duration, climate),
+        "laundry_bag": "laundry bag x 1",
+        "belt": "belt x 1"
     }
 
     return jsonify(response)

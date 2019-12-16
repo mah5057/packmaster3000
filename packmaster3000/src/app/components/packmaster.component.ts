@@ -1,10 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Headers, Http, RequestOptions } from '@angular/http';
-import { Location }               from '@angular/common';
 
 @Component({
   selector: 'packmaster',
-  templateUrl: './packmaster.component.html'
+  templateUrl: '../templates/packmaster.component.html'
 })
 
 export class PackMaster implements OnInit {
@@ -17,6 +16,7 @@ export class PackMaster implements OnInit {
   temperature: number;
   luxury: number;
   bonus: string;
+  packlist: object;
 
   constructor(private http: Http) {
     this.serverUrl = window.location.origin;
@@ -28,15 +28,20 @@ export class PackMaster implements OnInit {
     this.temperature = null;
     this.luxury = null;
     this.bonus = null;
+    this.packlist = null;
   }
 
-  getPresentation() {
+  setPacklist(data: object) {
+    this.packlist = data;
+  }
+
+  getPacklist() {
     let body = { 'duration': this.duration, 'temperature': this.temperature, 'luxury': this.luxury, 'bonus': this.bonus }
     return this.http.post(`${this.apiUrl}/packlist`, body, new RequestOptions({headers: this.headers}))
       .toPromise()
       .then(response => {
-        let data = response.json().result;
-        return data;
+        let data = response.json();
+        this.setPacklist(data);
       }).catch(this.handleError);
   }
 

@@ -3,13 +3,15 @@ import { FormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 import { NgModule } from '@angular/core';
 
-import { AppComponent } from './app.component';
-import { PackMaster } from "./packmaster.component";
+import { AppComponent } from './components/app.component';
+import { PackMaster } from "./components/packmaster.component";
+import { PackList } from "./components/packlist.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    PackMaster
+    PackMaster,
+    PackList
   ],
   imports: [
     BrowserModule,
