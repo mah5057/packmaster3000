@@ -36,13 +36,51 @@ export class PackMaster implements OnInit {
   }
 
   getPacklist() {
-    let body = { 'duration': this.duration, 'temperature': this.temperature, 'luxury': this.luxury, 'bonus': this.bonus }
-    return this.http.post(`${this.apiUrl}/packlist`, body, new RequestOptions({headers: this.headers}))
-      .toPromise()
-      .then(response => {
-        let data = response.json();
-        this.setPacklist(data);
-      }).catch(this.handleError);
+    if(this.validateAll()) {
+      let body = {
+        'duration': this.duration,
+        'temperature': this.temperature,
+        'luxury': this.luxury,
+        'bonus': this.bonus
+      }
+      return this.http.post(`${this.apiUrl}/packlist`, body, new RequestOptions({headers: this.headers}))
+        .toPromise()
+        .then(response => {
+          let data = response.json();
+          this.setPacklist(data);
+        }).catch(this.handleError);
+    }
+  }
+
+  validateAll() {
+    if (!this.validateDuration() || !this.validateTemperature() || !this.validateLuxury()) {
+      return false;
+    }
+    return true;
+  }
+
+  validateDuration() {
+    if(!this.duration) {
+      new alert("Duration is empty!");
+      return false;
+    }
+    return true;
+  }
+
+  validateTemperature() {
+    if(!this.temperature) {
+      new alert("Temperature is empty!");
+      return false;
+    }
+    return true;
+  }
+
+  validateLuxury() {
+    if(!this.luxury) {
+      new alert("Luxury is empty!");
+      return false;
+    }
+    return true;
   }
 
   private handleError (error: any): Promise<any> {

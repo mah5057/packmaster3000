@@ -57,13 +57,13 @@ SOCKS_BASE_AMOUNTS = {
 SOCKS_MULTIPLIERS = {
       0: 1,
       1: 1,
-      2: 2,
-      3: 2,
+      2: 1,
+      3: 1,
       4: 1,
-      5: 2,
-      6: 3,
-      7: 4,
-      8: 5
+      5: 1,
+      6: 1,
+      7: 1.5,
+      8: 1.5
 }
 
 UNDIES = {
@@ -91,13 +91,13 @@ UNDIES_BASE_AMOUNTS = {
 UNDIES_MULTIPLIERS = {
       0: 1,
       1: 1,
-      2: 2,
-      3: 2,
+      2: 1,
+      3: 1,
       4: 1,
-      5: 2,
-      6: 3,
-      7: 4,
-      8: 5
+      5: 1,
+      6: 1,
+      7: 1.5,
+      8: 1.5
 }
 
 BOTTOMS = {
@@ -125,18 +125,18 @@ BOTTOMS_BASE_AMOUNTS = {
 BOTTOMS_MULTIPLIERS = {
       0: 1,
       1: 1,
-      2: 2,
-      3: 2,
+      2: 1,
+      3: 1,
       4: 1,
-      5: 2,
-      6: 3,
-      7: 4,
-      8: 5
+      5: 1,
+      6: 1,
+      7: 1.5,
+      8: 1.5
 }
 
 TOPS = {
-      "FREEZING": "Thermal",
-      "VERY_COLD": "Thermal",
+      "FREEZING": "Shirt",
+      "VERY_COLD": "Shirt",
       "COLD": "Shirt",
       "CHILLY": "Shirt",
       "MILD": "Shirt",
@@ -159,13 +159,13 @@ TOPS_BASE_AMOUNTS = {
 TOPS_MULTIPLIERS = {
       0: 1,
       1: 1,
-      2: 2,
-      3: 2,
+      2: 1,
+      3: 1,
       4: 1,
-      5: 2,
-      6: 3,
-      7: 4,
-      8: 5
+      5: 1,
+      6: 1,
+      7: 1.5,
+      8: 1.5
 }
 
 WARM_LAYERS = {
@@ -182,7 +182,7 @@ WARM_LAYERS = {
 WARM_LAYERS_BASE_AMOUNTS = {
       0: 1,
       1: 2,
-      2: 3,
+      2: 2,
       3: 3,
       4: 3,
       5: 3,
@@ -193,13 +193,13 @@ WARM_LAYERS_BASE_AMOUNTS = {
 WARM_LAYERS_MULTIPLIERS = {
       0: 1,
       1: 1,
-      2: 2,
-      3: 2,
+      2: 1,
+      3: 1,
       4: 1,
-      5: 2,
-      6: 3,
-      7: 4,
-      8: 5
+      5: 1,
+      6: 1,
+      7: 1.5,
+      8: 1.5
 }
 
 OUTER_LAYERS = {
@@ -215,40 +215,6 @@ OUTER_LAYERS = {
 
 OUTER_LAYERS_BASE_AMOUNTS = {
       0: 1,
-      1: 2,
-      2: 2,
-      3: 2,
-      4: 2,
-      5: 2,
-      6: 2,
-      7: 2
-}
-
-OUTER_LAYERS_MULTIPLIERS = {
-      0: 1,
-      1: 1,
-      2: 2,
-      3: 2,
-      4: 1,
-      5: 2,
-      6: 3,
-      7: 4,
-      8: 5
-}
-
-GLOVES = {
-      "FREEZING": "Big Gloves",
-      "VERY_COLD": "Big Gloves",
-      "COLD": "Big Gloves",
-      "CHILLY": "Gloves",
-      "MILD": None,
-      "WARM": None,
-      "HOT": None,
-      "VERY_HOT": None,
-      "MELTING": None}
-
-GLOVES_BASE_AMOUNTS = {
-      0: 1,
       1: 1,
       2: 1,
       3: 1,
@@ -256,6 +222,40 @@ GLOVES_BASE_AMOUNTS = {
       5: 1,
       6: 1,
       7: 1
+}
+
+OUTER_LAYERS_MULTIPLIERS = {
+      0: 1,
+      1: 1,
+      2: 1,
+      3: 1,
+      4: 1,
+      5: 1,
+      6: 1,
+      7: 2,
+      8: 2
+}
+
+GLOVES = {
+      "FREEZING": "Gloves",
+      "VERY_COLD": "Gloves",
+      "COLD": "Gloves",
+      "CHILLY": "Gloves",
+      "MILD": "Gloves",
+      "WARM": "Gloves",
+      "HOT": "Gloves",
+      "VERY_HOT": "Gloves",
+      "MELTING": "Gloves"}
+
+GLOVES_BASE_AMOUNTS = {
+      0: 1,
+      1: 1,
+      2: 1,
+      3: 1,
+      4: 2,
+      5: 2,
+      6: 2,
+      7: 2
 }
 
 GLOVES_MULTIPLIERS = {
@@ -271,25 +271,25 @@ GLOVES_MULTIPLIERS = {
 }
 
 HATS = {
-      "FREEZING": "Warm Hat",
-      "VERY_COLD": "Warm Hat",
-      "COLD": "Warm Hat",
-      "CHILLY": "Warm Hat",
-      "MILD": None,
-      "WARM": None,
-      "HOT": None,
-      "VERY_HOT": None,
-      "MELTING": None}
+      "FREEZING": "Hat",
+      "VERY_COLD": "Hat",
+      "COLD": "Hat",
+      "CHILLY": "Hat",
+      "MILD": "Hat",
+      "WARM": "Hat",
+      "HOT": "Hat",
+      "VERY_HOT": "Hat",
+      "MELTING": "Hat"}
 
 HATS_BASE_AMOUNTS = {
       0: 1,
       1: 1,
       2: 1,
       3: 1,
-      4: 1,
-      5: 1,
-      6: 1,
-      7: 1
+      4: 2,
+      5: 2,
+      6: 2,
+      7: 2
 }
 
 HATS_MULTIPLIERS = {
