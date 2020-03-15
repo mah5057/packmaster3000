@@ -31,82 +31,84 @@ def get_climate_key(temp):
 
 def get_footwear(climate, luxury):
     if luxury == 0:
-        return "boots x 1"
+        return "Boots x 1"
     elif luxury == 1:
-        return "boots x 1\ncamp shoes x 1"
+        return "Boots x 1\nCamp shoes x 1"
     elif luxury == 2:
-        base = "boots x 1\ncamp shoes x 1"
+        base = "Boots x 1\nCamp shoes x 1"
         if climate in ["CHILLY", "MILD", "WARM", "HOT", "VERY_HOT", "MELTING"]:
-            base += "\nsandals x 1"
+            base += "\nSandals x 1"
         return base
     elif luxury == 3:
-        base = "boots x 1\ncamp shoes x 1"
+        base = "Boots x 1\nCamp shoes x 1"
         if climate in ["FREEZING", "VERY_COLD", "COLD"]:
-            base += "\nboots x 1"
+            base += "\nBoots x 1"
         if climate in ["CHILLY", "MILD", "WARM", "HOT", "VERY_HOT", "MELTING"]:
-            base += "\nsandals x 1"
+            base += "\nSandals x 1"
         return base
     elif luxury == 4:
-        base = "camp shoes x 1"
+        base = "Shoes x 1"
         if climate in ["FREEZING", "VERY_COLD", "COLD"]:
-            base += "\nboots x 1"
+            base += "\nBoots x 1"
         if climate in ["CHILLY", "MILD", "WARM", "HOT", "VERY_HOT", "MELTING"]:
-            base += "\nsandals x 1"
+            base += "\nSandals x 1"
         return base
     elif luxury == 5:
-        base = "camp shoes x 1"
+        base = "Shoes x 1"
         if climate in ["FREEZING", "VERY_COLD", "COLD"]:
-            base += "\nboots x 1"
+            base += "\nBoots x 1"
         if climate in ["CHILLY", "MILD", "WARM", "HOT", "VERY_HOT", "MELTING"]:
-            base += "\nsandals x 1"
+            base += "\nSandals x 1"
         return base
     elif luxury == 6:
-        base = "camp shoes x 1"
+        base = "Shoes x 1"
         if climate in ["FREEZING", "VERY_COLD", "COLD"]:
-            base += "\nboots x 1"
+            base += "\nBoots x 1"
         if climate in ["CHILLY", "MILD", "WARM", "HOT", "VERY_HOT", "MELTING"]:
-            base += "\nsandals x 1"
+            base += "\nSandals x 1"
         return base
     elif luxury == 7:
         base = ""
         if climate in ["FREEZING", "VERY_COLD", "COLD"]:
-            base += "boots x 1\nshoes x 1\nsandals x 1\ndress shoes x 1"
+            base += "Boots x 1\nShoes x 1\nSandals x 1\nDress shoes x 1"
         else:
-            base += "shoes x 1\nsandals x 1\ndress shoes x 1"
+            base += "Shoes x 1\nSandals x 1\nDress shoes x 1"
         return base
     elif luxury == 8:
         base = ""
         if climate in ["FREEZING", "VERY_COLD", "COLD"]:
-            base += "boots x 1\nshoes x 1\nsandals x 1\ndress shoes x 1"
+            base += "Boots x 1\nShoes x 1\nSandals x 1\nDress shoes x 1"
         else:
-            base += "shoes x 1\nsandals x 1\ndress shoes x 1"
+            base += "Shoes x 1\nSandals x 1\nDress shoes x 1"
         return base
 
 
 def get_socks(duration, climate, luxury):
     kind = model.SOCKS[climate]
-    amount = model.SOCKS_BASE_AMOUNTS[duration] + 1
-    base = "socks x %s" % (amount)
+    amount = duration + 1
+    base = "Socks x %s" % amount
 
     if luxury == 7 or luxury == 8:
-        dress_socks_amount = duration / 2
-        base += "\ndress socks x %s" % dress_socks_amount
+        dress_socks_amount = int(math.ceil(duration / 2))
+        base += "\nDress socks x %s" % dress_socks_amount
     return base if kind else None
 
 
 def get_undies(duration, climate, luxury):
     kind = model.UNDIES[climate]
-    amount = model.UNDIES_BASE_AMOUNTS[duration] + 1
+    amount = duration + 1
     return "%s x %s" % (kind, amount) if kind else None
 
 
 def get_bottoms(duration, climate, luxury):
     if luxury == 0:
-        "%s x 1" % climate
-    kind = model.BOTTOMS[climate]
-    amount = model.BOTTOMS_BASE_AMOUNTS[duration]
-    amount = amount * model.BOTTOMS_MULTIPLIERS[luxury]
-    amount = math.ceil(amount)
+        return "%s x 1" % model.BOTTOMS[climate]
+    else:
+        kind = model.BOTTOMS[climate]
+        if duration <= 3:
+            amount = 2
+        elif duration > 3:
+            amount = 3
     return "%s x %s" % (kind, amount) if kind else None
 
 
@@ -121,34 +123,37 @@ def get_tops(duration, climate, luxury):
         base = "%s x %s" % (kind, amount) if kind else None
     if luxury < 4:
         if climate in ["FREEZING", "VERY_COLD", "COLD", "CHILLY"]:
-            base += "\nthermal x 1"
+            base += "\nThermal x 1"
     return base
 
 
 def get_warm_layers(duration, climate, luxury):
     kind = model.WARM_LAYERS[climate]
-    amount = model.WARM_LAYERS_BASE_AMOUNTS[duration]
-    if luxury == 0:
-        return "%s x 1" % kind
-    amount = amount * model.WARM_LAYERS_MULTIPLIERS[luxury]
-    amount = math.ceil(amount)
-    if luxury == 1 or luxury == 2:
+    if kind:
+        amount = model.WARM_LAYERS_BASE_AMOUNTS[duration]
+        if luxury == 0:
+            return "%s x 1" % kind
         amount = amount * model.WARM_LAYERS_MULTIPLIERS[luxury]
-        amount /= 2
         amount = math.ceil(amount)
-    return "%s x %s" % (kind, amount) if kind else None
+        if luxury == 1 or luxury == 2:
+            amount = amount * model.WARM_LAYERS_MULTIPLIERS[luxury]
+            amount /= 2
+            amount = math.ceil(amount)
+        return "%s x %s" % (kind, amount) if kind else None
+    else:
+        return ""
 
 
 def get_outer_layers(duration, climate, luxury):
     kind = model.OUTER_LAYERS[climate]
-    amount = model.OUTER_LAYERS_BASE_AMOUNTS[duration]
-    amount = amount * model.OUTER_LAYERS_MULTIPLIERS[luxury]
+    amount = 1
     return "%s x %s" % (kind, amount) if kind else None
 
 
 def get_gloves(duration, climate, luxury):
     kind = model.GLOVES[climate]
-    amount = model.GLOVES_BASE_AMOUNTS[duration]
+    # amount = model.GLOVES_BASE_AMOUNTS[duration]
+    amount = 1
     if luxury < 4:
         return "%s x 1" % kind
     return "%s x %s" % (kind, amount) if kind else None
@@ -182,6 +187,13 @@ def packlist():
     temp = int(data['temperature'])
     luxury = float(data['luxury'])
     bonus = data['bonus']
+
+    if bonus == "hot":
+        temp += 10
+
+    if bonus == "cold":
+        temp -= 10
+
     climate = get_climate_key(temp)
 
     response = {
@@ -194,8 +206,8 @@ def packlist():
         "outer_layers": get_outer_layers(duration, climate, luxury),
         "gloves": get_gloves(duration, climate, luxury),
         "hats": get_hats(duration, climate, luxury),
-        "laundry_bag": "laundry bag x 1",
-        "belt": "belt x 1"
+        "belt": "Belt x 1",
+        "laundry_bag": "Laundry bag x 1"
     }
 
     return jsonify(response)

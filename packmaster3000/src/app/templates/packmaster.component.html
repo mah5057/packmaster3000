@@ -1,13 +1,15 @@
 <div style="text-align:center">
+  <div class="logo">
+    <img width="301" height="180" src="../../assets/logo.png">
+  </div>
   <h1>
-    Pack Master 3000!
+    Joseph's Pack Master 3000! by Matt
   </h1>
 </div>
-<h2>Joseph's PACKMASTER 3000 by Matt</h2>
 <h3>Answer these questions and enter your email to receive a customized pack list that we think will be almost all the way right!</h3>
-<ul>
+<ul style="list-style: none;">
   <div>
-    <li>Question 1: How long will your trip be?</li>
+    <li>How long will your trip be?</li>
     <select [(ngModel)]="duration">
       <option value="0">Day Trip</option>
       <option value="1">Overnight</option>
@@ -21,7 +23,7 @@
   </div>
   <br>
   <div>
-    <li>Question 2: Whats the temperature gonna be?</li>
+    <li>What's the temperature gonna be?</li>
     <select [(ngModel)]="temperature">
       <option value="20">FREEZING (20 F)</option>
       <option value="30">VERY COLD (30 F)</option>
@@ -36,7 +38,7 @@
   </div>
   <br>
   <div>
-    <li>Question 3: What is your luxury level?</li>
+    <li>What is your luxury level?</li>
     <select [(ngModel)]="luxury">
       <option value="0">Ultra Lite Backpacking</option>
       <option value="1">Backpacking</option>
